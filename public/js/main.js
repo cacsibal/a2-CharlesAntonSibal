@@ -1,27 +1,94 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
 
-const submit = async function( event ) {
-  // stop form submission from trying to load
-  // a new .html page for displaying results...
-  // this was the original browser behavior and still
-  // remains to this day
-  event.preventDefault()
-  
-  const input = document.querySelector( "#yourname" ),
-        json = { yourname: input.value },
-        body = JSON.stringify( json )
+let i = 0;
+let visible = false;
 
-  const response = await fetch( "/submit", {
-    method:"POST",
-    body 
-  })
+const submit = async function (event) {
+    event.preventDefault()
 
-  const text = await response.text()
+    const input = document.querySelector("#yourname"),
+        json = {
+            gameId: i,
+            guess: parseInt(input.value)
+        },
+        body = JSON.stringify(json)
 
-  console.log( "text:", text )
+    const response = await fetch("/guess", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body
+    });
+
+    const output = await response.text();
+
+    if(output === "correct") {
+        i++;
+        initGame();
+    }
 }
 
-window.onload = function() {
-   const button = document.querySelector("button");
-  button.onclick = submit;
+const initGame = async function () {
+    const json =
+        {
+            gameId: i,
+            answer: Math.floor(Math.random() * 10) + 1,
+            guesses: [],
+            won: false
+        },
+        body = JSON.stringify(json);
+
+    const response = await fetch("/game", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body
+    });
+}
+
+const initialize = function () {
+    initGame()
+        .then(() => {
+            console.log("game started");
+        })
+            .catch(err => {
+            console.log(err);
+        });
+}
+
+const show = async function () {
+    event.preventDefault();
+    visible = !visible;
+
+    if(visible) {
+        const response = await fetch("/stats", {
+            method: "GET"
+        });
+
+        let stats = await response.text();
+        console.log(stats);
+
+        const statsList = JSON.parse(stats);
+        statsList.map(stat => {
+            let container = document.createElement("div");
+            container.innerHTML = JSON.stringify(stat);
+
+            document.body.appendChild(container);
+        })
+    }
+}
+
+window.onload = function () {
+    initialize();
+
+    const submitButton = document.getElementById("submit");
+    submitButton.onclick = submit;
+
+    const newGameButton = document.getElementById("new-game");
+    newGameButton.onclick = () => {
+        event.preventDefault()
+        i++;
+        initialize()
+    }
+
+    const showButton = document.getElementById("view-statistics")
+    showButton.onclick = show;
 }
