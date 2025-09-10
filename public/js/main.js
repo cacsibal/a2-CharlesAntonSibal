@@ -1,19 +1,8 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
 
-/* documentation generated with ai */
-
 let i = 0;
 let hidden = true;
 
-/**
- * Handles the form submission, sends a POST request to the "/guess" endpoint with the user's input value,
- * and processes the server's response to determine the next steps in the game.
- *
- * @async
- * @function
- * @param {Event} event - The event object associated with the form submission.
- * @throws Will throw an error if the fetch request fails.
- */
 const submit = async function () {
     event.preventDefault()
 
@@ -38,17 +27,6 @@ const submit = async function () {
     }
 }
 
-/**
- * Initializes a new game session by creating a game object with random parameters and sending it to the server.
- *
- * This function generates a random number as the answer, prepares a JSON payload with the game's state,
- * and makes an asynchronous POST request to the server to start a new game session.
- *
- * @async
- * @function initGame
- *
- * @returns {Promise<void>} A promise that resolves once the game initialization request is completed.
- */
 const initGame = async function () {
     const json =
         {
@@ -66,16 +44,6 @@ const initGame = async function () {
     });
 }
 
-/**
- * Initializes the game by calling the `initGame` function.
- * Executes logic to handle the successful initialization or
- * errors encountered during the initialization process.
- *
- * The function performs the following:
- * - Invokes the asynchronous `initGame` function.
- * - Logs "game started" to the console upon successful completion.
- * - Logs any encountered errors to the console if `initGame` fails.
- */
 const initialize = function () {
     initGame()
         .then(() => {
@@ -105,6 +73,7 @@ const displayGames = async function () {
     container.classList.add(hidden ? "hidden" : "visible");
 
     let table = document.createElement("table");
+    table.style.width = "100%";
 
     let headerRow = document.createElement("tr");
     ["gameId", "answer", "guesses", "won"].forEach(header => {
@@ -122,7 +91,7 @@ const displayGames = async function () {
         dataRow.appendChild(gameIdCell);
         
         let answerCell = document.createElement("td");
-        answerCell.textContent = stat.answer || "";
+        answerCell.textContent = stat.answer;
         dataRow.appendChild(answerCell);
         
         let guessesCell = document.createElement("td");
@@ -130,7 +99,7 @@ const displayGames = async function () {
         dataRow.appendChild(guessesCell);
         
         let wonCell = document.createElement("td");
-        wonCell.textContent = stat.won !== undefined ? stat.won.toString() : "";
+        wonCell.textContent = stat.won.toString();
         dataRow.appendChild(wonCell);
 
         table.appendChild(dataRow);
@@ -138,7 +107,7 @@ const displayGames = async function () {
 
     container.appendChild(table);
 
-    document.body.appendChild(container);
+    document.querySelector(".statistics").appendChild(container);
 }
 
 window.onload = function () {
