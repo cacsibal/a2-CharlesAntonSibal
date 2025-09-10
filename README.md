@@ -1,4 +1,4 @@
-## Number Guessing Game
+## Number Guessing Game: a2-CharlesAntonSibal
 A simple number guessing game. Just input a number from 1-10 and check the statistics to see if you guessed correctly! I used flexbox for positioning.
 
 ## Technical Achievements
