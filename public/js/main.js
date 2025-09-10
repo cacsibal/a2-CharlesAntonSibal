@@ -152,3 +152,20 @@ window.onload = function () {
         hidden = !hidden;
     }
 }
+
+const clearAppData = async function () {
+    fetch("/*", {
+        method: "DELETE"
+    })
+}
+
+window.addEventListener('beforeunload', function (e) {
+    console.log("clearing appdata");
+
+    clearAppData()
+        .then(() => {
+            console.log("appdata cleared");
+        }).catch(err => {
+        console.log(err);
+    });
+})

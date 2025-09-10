@@ -8,15 +8,28 @@ const http = require("http"),
     dir = "public/",
     port = 3000
 
-const appdata = [];
+let appdata = [];
 
 const server = http.createServer(function (request, response) {
     if (request.method === "GET") {
         handleGet(request, response)
     } else if (request.method === "POST") {
         handlePost(request, response)
+    } else if (request.method === "DELETE") {
+        handleDelete(request, response);
     }
 })
+
+const handleDelete = function (request, response) {
+    if(request.url === "/*") {
+        appdata = [];
+        response.writeHead(200, "OK", {"Content-Type": "application/json"});
+        response.end(JSON.stringify(appdata));
+    } else {
+        response.writeHead(404, "Not Found", {"Content-Type": "application/json"});
+        response.end(JSON.stringify({error: "Not Found"}));
+    }
+}
 
 const handleGet = function (request, response) {
     const filename = dir + request.url.slice(1)
