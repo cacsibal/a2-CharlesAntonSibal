@@ -17,7 +17,7 @@ let hidden = true;
 const submit = async function () {
     event.preventDefault()
 
-    const input = document.querySelector("#yourname"),
+    const input = document.querySelector("#guess"),
         json = {
             gameId: i,
             guess: parseInt(input.value)
@@ -99,14 +99,46 @@ const displayGames = async function () {
 
     let stats = await response.text();
     const statsList = JSON.parse(stats);
-    statsList.map(stat => {
-        let container = document.createElement("div");
-        container.classList.add("stat");
-        container.classList.add(hidden ? "hidden" : "visible");
-        container.innerHTML = JSON.stringify(stat);
 
-        document.body.appendChild(container);
+    let container = document.createElement("div");
+    container.classList.add("stat");
+    container.classList.add(hidden ? "hidden" : "visible");
+
+    let table = document.createElement("table");
+
+    let headerRow = document.createElement("tr");
+    ["gameId", "answer", "guesses", "won"].forEach(header => {
+        let th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    statsList.map(stat => {
+        let dataRow = document.createElement("tr");
+        
+        let gameIdCell = document.createElement("td");
+        gameIdCell.textContent = stat.gameId;
+        dataRow.appendChild(gameIdCell);
+        
+        let answerCell = document.createElement("td");
+        answerCell.textContent = stat.answer || "";
+        dataRow.appendChild(answerCell);
+        
+        let guessesCell = document.createElement("td");
+        guessesCell.textContent = Array.isArray(stat.guesses) ? stat.guesses.join(", ") : (stat.guesses || "");
+        dataRow.appendChild(guessesCell);
+        
+        let wonCell = document.createElement("td");
+        wonCell.textContent = stat.won !== undefined ? stat.won.toString() : "";
+        dataRow.appendChild(wonCell);
+
+        table.appendChild(dataRow);
     })
+
+    container.appendChild(table);
+
+    document.body.appendChild(container);
 }
 
 window.onload = function () {
