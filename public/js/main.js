@@ -37,7 +37,7 @@ const initGame = async function () {
         },
         body = JSON.stringify(json);
 
-    const response = await fetch("/game", {
+    await fetch("/game", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body
