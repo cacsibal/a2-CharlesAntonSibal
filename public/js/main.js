@@ -47,6 +47,13 @@ const initGame = async function () {
 const initialize = function () {
     initGame()
         .then(() => {
+            displayGames()
+                .then(() => {
+                    console.log("game displayed")
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             console.log("game started");
         })
         .catch(err => {
