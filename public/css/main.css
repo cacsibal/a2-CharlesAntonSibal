@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%);
     color: #2c2c2c;
     line-height: 1.6;
@@ -22,7 +21,6 @@ body {
     flex-direction: column;
 }
 
-/* Header styles */
 header {
     text-align: center;
     margin-bottom: 3rem;
@@ -43,19 +41,17 @@ h1 {
     font-weight: 300;
 }
 
-/* Main content */
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* Form styles */
 .game-form {
     background: #ffffff;
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     border: 1px solid #f0ede5;
 }
 
@@ -71,7 +67,7 @@ label {
     font-size: 0.95rem;
 }
 
-input[type="number"] {
+input {
     width: 100%;
     padding: 0.875rem 1rem;
     font-size: 1rem;
@@ -82,14 +78,13 @@ input[type="number"] {
     font-family: inherit;
 }
 
-input[type="number"]:focus {
+input:focus {
     outline: none;
     border-color: #d4c4a0;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(212, 196, 160, 0.1);
 }
 
-/* Button styles */
 .button-group {
     display: flex;
     gap: 1rem;
@@ -168,52 +163,23 @@ button:hover {
 }
 
 .stat th {
-    background: #f8f6f0 !important;
-    color: #2c2c2c !important;
-    font-weight: 600 !important;
-    padding: 1rem !important;
+    background: #f8f6f0;
+    color: #2c2c2c;
+    font-weight: 600;
+    padding: 1rem;
     text-align: left;
-    border: none !important;
-    border-bottom: 1px solid #e8e5de !important;
+    border: none;
+    border-bottom: 1px solid #e8e5de;
 }
 
 .stat td {
-    padding: 1rem !important;
-    border: none !important;
-    border-bottom: 1px solid #f0ede5 !important;
-    background: white !important;
-    color: #2c2c2c !important;
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid #f0ede5;
+    background: white;
+    color: #2c2c2c;
 }
 
 .stat tr:last-child td {
-    border-bottom: none !important;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    .game-form {
-        padding: 1.5rem;
-    }
-
-    .button-group {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-        min-width: auto;
-    }
-
-    .stat th, .stat td {
-        padding: 0.75rem !important;
-        font-size: 0.85rem;
-    }
+    border-bottom: none;
 }
