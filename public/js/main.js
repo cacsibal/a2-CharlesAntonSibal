@@ -154,12 +154,12 @@ window.onload = function () {
 }
 
 const clearAppData = async function () {
-    fetch("/*", {
+    await fetch("/*", {
         method: "DELETE"
     })
 }
 
-window.addEventListener('beforeunload', function (e) {
+window.addEventListener('beforeunload', function () {
     console.log("clearing appdata");
 
     clearAppData()
