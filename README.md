@@ -1,5 +1,8 @@
 ## Number Guessing Game: a2-CharlesAntonSibal
-A simple number guessing game. Just input a number from 1-10 and check the statistics to see if you guessed correctly! I used flexbox for positioning.
+
+https://a2-charlesantonsibal.onrender.com
+
+A simple number guessing game. Input a number from 1-10 and check the statistics to see if you guessed correctly! I used flexbox for positioning.
 
 ## Technical Achievements
 - **Tech Achievement 1**: Implementing get and post requests to the server.
